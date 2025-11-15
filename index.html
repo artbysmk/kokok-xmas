@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pump Battle - Christmas Edition</title>
+    <link rel="icon" href="images/lg.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --christmas-red: #c41e3a;
+            --christmas-green: #2e8b57;
+            --christmas-gold: #ffd700;
+            --christmas-silver: #c0c0c0;
+            --dark-bg: #0a1f0a;
+            --darker-bg: #051405;
+            --card-bg: #122312;
+            --text-color: #f0fff0;
+            --accent-color: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(46, 139, 87, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(196, 30, 58, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Efecto de nieve */
+        #snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .snowflake {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
+        
+        /* Efectos de brillo navideños */
+        .christmas-text {
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+        
+        .glow-effect {
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 1.5rem;
+            border-radius: 0px;
+            box-shadow: 0 0 0px var(--christmas-gold);
+            overflow: hidden;
+        }
+
+        .header-text {
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            color: var(--christmas-gold);
+            text-shadow: 0 0 10px var(--christmas-gold);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            color: var(--christmas-silver);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(46, 139, 87, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--christmas-red), var(--christmas-green), var(--christmas-gold));
+        }
+
+        h2 {
+            color: var(--christmas-gold);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            font-size: 1.8rem;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* Sección de Introducción */
+        .intro-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .intro-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .intro-text p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .intro-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro-video {
+            width: 400px;
+            height: auto;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            overflow: hidden;
+        }
+
+        #intro h2 {
+            text-align: center;
+        }
+        
+        /* Sección del Creador */
+        .creator-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .meme-preview {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .meme-canvas {
+            width: 400px;
+            height: 400px;
+            background-color: var(--darker-bg);
+            border: 2px dashed var(--christmas-silver);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .meme-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        /* Texto personalizado en la parte inferior */
+        .custom-text-layer {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+            padding: 0 10px;
+        }
+        
+        .custom-text {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--christmas-gold);
+            text-shadow: 0 0 5px var(--christmas-gold), 0 0 10px var(--christmas-gold);
+            background: rgba(0, 0, 0, 0.6);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 5px;
+            max-width: 90%;
+            word-wrap: break-word;
+        }
+        
+        .placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--christmas-silver);
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .customization-panel {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .customization-category {
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .category-header {
+            background: rgba(46, 139, 87, 0.2);
+            padding: 0.8rem 1rem;
+            font-weight: 600;
+            color: var(--christmas-green);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .category-header:hover {
+            background: rgba(46, 139, 87, 0.3);
+        }
+        
+        .category-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .category-header.active .category-icon {
+            transform: rotate(180deg);
+        }
+        
+        .options-grid {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 0.8rem;
+            padding: 1rem;
+            background: rgba(10, 31, 10, 0.5);
+        }
+        
+        .category-header.active + .options-grid {
+            display: grid;
+        }
+        
+        .option {
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 6px;
+            padding: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: rgba(18, 35, 18, 0.7);
+        }
+        
+        .option:hover {
+            border-color: var(--christmas-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(46, 139, 87, 0.3);
+        }
+        
+        .option.active {
+            border-color: var(--christmas-green);
+            background: rgba(46, 139, 87, 0.2);
+            box-shadow: 0 0 10px rgba(46, 139, 87, 0.5);
+        }
+        
+        .option-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 0.3rem;
+            filter: drop-shadow(0 0 5px rgba(46, 139, 87, 0.5));
+        }
+        
+        .option-name {
+            font-size: 0.8rem;
+            color: var(--text-color);
+        }
+        
+        /* Panel de texto personalizado */
+        .text-customization {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(10, 31, 10, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
+        }
+        
+        .text-input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .text-input-container label {
+            color: var(--christmas-green);
+            font-weight: 600;
+        }
+        
+        .text-input-container input {
+            padding: 0.8rem;
+            background: rgba(18, 35, 18, 0.7);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 6px;
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .text-input-container input:focus {
+            outline: none;
+            border-color: var(--christmas-green);
+            box-shadow: 0 0 10px rgba(46, 139, 87, 0.3);
+        }
+        
+        .text-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .text-option {
+            flex: 1;
+            padding: 0.5rem;
+            background: rgba(18, 35, 18, 0.7);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
+        }
+        
+        .text-option:hover {
+            border-color: var(--christmas-green);
+            transform: translateY(-2px);
+        }
+        
+        .text-option.active {
+            border-color: var(--christmas-green);
+            background: rgba(46, 139, 87, 0.2);
+            box-shadow: 0 0 10px rgba(46, 139, 87, 0.5);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            min-width: 160px;
+            justify-content: center;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(46, 139, 87, 0.2);
+            color: var(--christmas-green);
+            border: 2px solid var(--christmas-green);
+            box-shadow: 0 0 10px rgba(46, 139, 87, 0.3);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(46, 139, 87, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            background: rgba(46, 139, 87, 0.3);
+            box-shadow: 0 0 20px rgba(46, 139, 87, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: rgba(46, 139, 87, 0.2);
+            border: 2px solid var(--christmas-green);
+            color: var(--christmas-green);
+        }
+        
+        .btn-primary:hover {
+            background: rgba(46, 139, 87, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid var(--christmas-gold);
+            color: var(--christmas-gold);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .btn-success {
+            background: rgba(46, 139, 87, 0.2);
+            border: 2px solid var(--christmas-green);
+            color: var(--christmas-green);
+        }
+        
+        .btn-success:hover {
+            background: rgba(46, 139, 87, 0.3);
+        }
+        
+        .btn-accent {
+            background: rgba(196, 30, 58, 0.2);
+            border: 2px solid var(--christmas-red);
+            color: var(--christmas-red);
+        }
+        
+        .btn-accent:hover {
+            background: rgba(196, 30, 58, 0.3);
+            box-shadow: 0 0 20px rgba(196, 30, 58, 0.5);
+        }
+        
+        .btn-random {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid var(--christmas-gold);
+            color: var(--christmas-gold);
+        }
+        
+        .btn-random:hover {
+            background: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .btn-download {
+            background: rgba(46, 139, 87, 0.2);
+            border: 2px solid var(--christmas-green);
+            color: var(--christmas-green);
+        }
+        
+        .btn-download:hover {
+            background: rgba(46, 139, 87, 0.3);
+            box-shadow: 0 0 20px rgba(46, 139, 87, 0.5);
+        }
+        
+        /* Sección de Galería */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .gallery-img-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: var(--darker-bg);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .gallery-buttons {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem;
+            background: rgba(10, 31, 10, 0.8);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-buttons {
+            opacity: 1;
+        }
+        
+        .gallery-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(46, 139, 87, 0.2);
+            color: var(--christmas-green);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .gallery-btn:hover {
+            background: var(--christmas-green);
+            color: var(--darker-bg);
+            transform: scale(1.1);
+        }
+        
+        .gallery-info {
+            padding: 1rem;
+        }
+        
+        .gallery-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--christmas-green);
+        }
+        
+        .gallery-date {
+            font-size: 0.8rem;
+            color: var(--christmas-silver);
+        }
+        
+        /* Modal para vista ampliada */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            border: 2px solid var(--christmas-green);
+            box-shadow: 0 0 30px rgba(46, 139, 87, 0.5);
+        }
+        
+        .modal-img-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        .modal-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--christmas-green);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%);
+            color: var(--text-color);
+            text-align: center;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--christmas-green);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--christmas-green), transparent);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 1.5rem;
+            border-radius: 0px;
+            box-shadow: 0 0 0px var(--christmas-gold);
+            overflow: hidden;
+        }
+
+        .footer-logo video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: none;
+        }
+
+        .footer-text p {
+            margin: 0;
+            color: var(--christmas-green);
+            font-size: 0.95rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: var(--christmas-green);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--christmas-gold);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-top: 1px solid rgba(46, 139, 87, 0.2);
+            background-color: var(--darker-bg);
+        }
+
+        footer .copyright {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            color: var(--christmas-green);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .creator-container {
+                flex-direction: column;
+            }
+            
+            .meme-canvas {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-text {
+                text-align: center;
+                margin-top: 1rem;
+            }
+            
+            .logo {
+                margin-right: 0;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .footer-logo-container {
+                flex-direction: column;
+            }
+            
+            .action-buttons {
+                justify-content: center;
+            }
+            
+            .intro-content {
+                flex-direction: column;
+            }
+            
+            .btn {
+                min-width: 140px;
+                font-size: 0.8rem;
+            }
+            
+            .text-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor para el efecto de nieve -->
+    <div id="snow-container"></div>
+
+    <header>
+        <div class="header-content">
+            <video class="logo-img" autoplay muted loop playsinline>
+                <source src="images/kokok_head.webm" type="video/webm">
+                Your browser does not support HTML5 video.
+            </video>
+            <div class="header-text">
+                <h1 class="christmas-text">PUMP BATTLE</h1>
+                <p class="tagline christmas-text">Christmas NFT Card Creator</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="intro">
+            <h2>WELCOME TO PUMP BATTLE CHRISTMAS EDITION</h2>
+            <div class="intro-content">
+                <div class="intro-text">
+                    <p>Create unique, Christmas-themed NFT cards that are ready for the blockchain. Each card features festive elements and holiday cheer.</p>
+                    <br>
+                    <p>Start creating your Christmas card today and spread holiday joy in the crypto world!</p>
+                </div>
+                <div class="intro-image">
+                    <video class="intro-video" autoplay muted loop playsinline>
+                        <source src="images/kk_cads.webm" type="video/webm">
+                        Your browser does not support the .webm video format
+                    </video>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección del Creador -->
+        <section id="creator">
+            <h2>CHRISTMAS CARD CREATOR</h2>
+            <div class="creator-container">
+                <div class="meme-preview">
+                    <div class="meme-canvas" id="memeCanvas">
+                        <div class="placeholder-text">Select options to create your Christmas card</div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-random" id="randomBtn">
+                            <i class="fas fa-gift"></i> RANDOMIZE
+                        </button>
+                        <button class="btn btn-primary" id="saveBtn">
+                            <i class="fas fa-save"></i> SAVE CARD
+                        </button>
+                        <button class="btn btn-secondary" id="resetBtn">
+                            <i class="fas fa-redo"></i> RESET
+                        </button>
+                        <button class="btn btn-success" id="mintBtn">
+                            <i class="fas fa-coins"></i> MINT CARD
+                        </button>
+                        <button class="btn btn-download" id="downloadBtn">
+                            <i class="fas fa-download"></i> DOWNLOAD
+                        </button>
+                        <button class="btn btn-accent" id="shareBtn">
+                            <i class="fab fa-twitter"></i> SHARE ON X
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="customization-panel">
+                    <div class="customization-category">
+                        <div class="category-header">
+                            <span>BODY</span>
+                            <i class="fas fa-chevron-down category-icon"></i>
+                        </div>
+                        <div class="options-grid" id="bodyOptions">
+                            <!-- Las opciones se generarán dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <div class="customization-category">
+                        <div class="category-header">
+                            <span>GIFTS</span>
+                            <i class="fas fa-chevron-down category-icon"></i>
+                        </div>
+                        <div class="options-grid" id="giftsOptions">
+                            <!-- Las opciones se generarán dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <div class="customization-category">
+                        <div class="category-header">
+                            <span>HEAD</span>
+                            <i class="fas fa-chevron-down category-icon"></i>
+                        </div>
+                        <div class="options-grid" id="headOptions">
+                            <!-- Las opciones se generarán dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <!-- Se eliminaron las categorías FACE, ACCESSORIES y POWER -->
+                    
+                    <div class="customization-category">
+                        <div class="category-header">
+                            <span>LABEL</span>
+                            <i class="fas fa-chevron-down category-icon"></i>
+                        </div>
+                        <div class="options-grid" id="labelOptions">
+                            <!-- Las opciones se generarán dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <div class="customization-category">
+                        <div class="category-header">
+                            <span>BACKGROUND</span>
+                            <i class="fas fa-chevron-down category-icon"></i>
+                        </div>
+                        <div class="options-grid" id="backgroundOptions">
+                            <!-- Las opciones se generarán dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <!-- Panel de texto personalizado -->
+                    <div class="text-customization">
+                        <div class="text-input-container">
+                            <label for="customTextInput">CHRISTMAS MESSAGE</label>
+                            <input type="text" id="customTextInput" placeholder="Enter your Christmas message..." maxlength="40">
+                        </div>
+                        <div class="text-options">
+                            <div class="text-option active" data-color="var(--christmas-green)">
+                                GREEN
+                            </div>
+                            <div class="text-option" data-color="var(--christmas-red)">
+                                RED
+                            </div>
+                            <div class="text-option" data-color="var(--christmas-gold)">
+                                GOLD
+                            </div>
+                            <div class="text-option" data-color="var(--christmas-silver)">
+                                SILVER
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección de Galería -->
+        <section id="gallery">
+            <h2>CHRISTMAS CARD GALLERY</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Las cartas guardadas se mostrarán aquí -->
+                <div class="gallery-empty" style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+                    <p>You haven't saved any Christmas cards yet. Create and mint your first card!</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Modal para vista ampliada -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div class="modal-img-container" id="modalImgContainer"></div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo-container">
+                <div class="footer-logo">
+                    <video autoplay muted loop playsinline>
+                        <source src="images/kokok_head.webm" type="video/webm">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+                <div class="footer-text">
+                    <p>Pump Battle - Create, customize, and trade your Christmas NFT cards on the blockchain.</p>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="https://x.com/PumpBattle3_0" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+            </div>
+
+            <div class="copyright">
+                &copy; 2025 KOKOK XMAS - Christmas Edition. All rights reserved. Powered by blockchain technology.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Datos de ejemplo para las opciones de personalización
+        const customizationOptions = {
+            body: [
+                { id: 'body1', name: 'Santa', img: 'images/body_1.png' },
+                { id: 'body2', name: 'Elf', img: 'images/body_2.png' },
+                { id: 'body3', name: 'Reindeer', img: 'images/body_3.png' },
+                { id: 'body4', name: 'Snowman', img: 'images/body_4.png' },
+                
+            ],
+            gifts: [
+                { id: 'none', name: 'None', img: 'images/none.png' },
+                { id: 'gifts1', name: 'Santa Hat', img: 'images/cap_1.png' },
+                { id: 'gifts2', name: 'Elf Hat', img: 'images/cap_2.png' },
+                { id: 'gifts3', name: 'Reindeer Antlers', img: 'images/cap_3.png' },
+                { id: 'gifts4', name: 'Christmas Crown', img: 'images/cap_4.png' },
+                { id: 'gifts5', name: 'Snow Cap', img: 'images/cap_5.png' },
+            ],
+            head: [
+                { id: 'head1', name: 'Santa', img: 'images/head_1.png' },
+                { id: 'head2', name: 'Elf', img: 'images/head_2.png' },
+                { id: 'head3', name: 'Reindeer', img: 'images/head_3.png' },
+                { id: 'head4', name: 'Snowman', img: 'images/head_4.png' },
+                { id: 'head5', name: 'Gingerbread', img: 'images/head_5.png' },
+                
+            ],
+            // Se eliminaron las categorías face, accessories y power
+            label: [
+                { id: 'label1', name: 'None', img: 'images/label_1.png' },
+                { id: 'label2', name: 'Naughty', img: 'images/label_2.png' },
+                { id: 'label3', name: 'Nice', img: 'images/label_3.png' },
+                { id: 'label4', name: 'Jolly', img: 'images/label_4.png' },
+                { id: 'label5', name: 'Merry', img: 'images/label_5.png' },
+            ],
+            background: [
+                { id: 'bg1', name: 'Snowy Village', img: 'images/bg_1.png' },
+                { id: 'bg2', name: 'Christmas Tree', img: 'images/bg_2.png' },
+                { id: 'bg3', name: 'Fireplace', img: 'images/bg_3.png' },
+                { id: 'bg4', name: 'North Pole', img: 'images/bg_4.png' },
+                { id: 'bg5', name: 'Winter Forest', img: 'images/bg_5.png' },
+                { id: 'bg6', name: 'Gift Workshop', img: 'images/bg_6.png' },
+                { id: 'bg7', name: 'Starry Night', img: 'images/bg_7.png' },
+                { id: 'bg8', name: 'Candy Land', img: 'images/bg_8.png' },
+                { id: 'bg9', name: 'Ice Palace', img: 'images/bg_9.png' },
+                { id: 'bg10', name: 'Santa\'s Sleigh', img: 'images/bg_10.png' },
+            ]
+        };
+
+        // Estado actual de la carta
+        let currentCard = {
+            body: 'body1',
+            gifts: 'gifts1',
+            head: 'head3',
+            label: 'label1',
+            background: 'bg5',
+            customText: '',
+            textColor: 'var(--christmas-green)'
+        };
+
+        // Galería de cartas guardadas
+        let savedCards = [];
+
+        // Inicialización de la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            // Iniciar efecto de nieve
+            createSnowflakes();
+            
+            // Cargar opciones de personalización
+            loadCustomizationOptions();
+            
+            // Actualizar vista previa inicial
+            updateMemePreview();
+            
+            // Configurar botones de acción
+            setupActionButtons();
+            
+            // Cargar galería
+            loadGallery();
+            
+            // Configurar modal
+            setupModal();
+            
+            // Configurar panel de texto personalizado
+            setupTextCustomization();
+        });
+
+        // Crear efecto de nieve
+        function createSnowflakes() {
+            const snowContainer = document.getElementById('snow-container');
+            const snowflakeCount = 100;
+            
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 5 + 2;
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                
+                // Posición inicial aleatoria
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                
+                // Duración de animación aleatoria
+                const duration = Math.random() * 10 + 5;
+                snowflake.style.animationDuration = `${duration}s`;
+                
+                // Retraso inicial aleatorio
+                snowflake.style.animationDelay = `${Math.random() * 5}s`;
+                
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        // Configurar panel de texto personalizado
+        function setupTextCustomization() {
+            const textInput = document.getElementById('customTextInput');
+            const textOptions = document.querySelectorAll('.text-option');
+            
+            // Configurar evento para el input de texto
+            textInput.addEventListener('input', function() {
+                currentCard.customText = this.value;
+                updateMemePreview();
+            });
+            
+            // Configurar eventos para los botones de color
+            textOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remover clase activa de todas las opciones
+                    textOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Añadir clase activa a la opción seleccionada
+                    this.classList.add('active');
+                    
+                    // Actualizar color del texto
+                    currentCard.textColor = this.getAttribute('data-color');
+                    updateMemePreview();
+                });
+            });
+        }
+
+        // Cargar las opciones de personalización en la interfaz
+        function loadCustomizationOptions() {
+            for (const category in customizationOptions) {
+                const container = document.getElementById(`${category}Options`);
+                const options = customizationOptions[category];
+                
+                options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'option';
+                    optionElement.setAttribute('data-category', category);
+                    optionElement.setAttribute('data-id', option.id);
+                    
+                    optionElement.innerHTML = `
+                        <img src="${option.img}" alt="${option.name}" class="option-img">
+                        <div class="option-name">${option.name}</div>
+                    `;
+                    
+                    // Marcar la opción actual como activa
+                    if (currentCard[category] === option.id) {
+                        optionElement.classList.add('active');
+                    }
+                    
+                    optionElement.addEventListener('click', function() {
+                        // Actualizar selección visual
+                        document.querySelectorAll(`#${category}Options .option`).forEach(opt => {
+                            opt.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        
+                        // Actualizar estado
+                        currentCard[category] = option.id;
+                        
+                        // Actualizar vista previa
+                        updateMemePreview();
+                    });
+                    
+                    container.appendChild(optionElement);
+                });
+            }
+            
+            // Configurar los encabezados de categoría para desplegar/ocultar opciones
+            const categoryHeaders = document.querySelectorAll('.category-header');
+            categoryHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+        }
+
+        // Actualizar la vista previa de la carta
+        function updateMemePreview() {
+            const canvas = document.getElementById('memeCanvas');
+            canvas.innerHTML = '';
+            
+            // Añadir capas en el orden correcto
+            addLayer(canvas, currentCard.background, 'background');
+            addLayer(canvas, currentCard.body, 'body');
+            addLayer(canvas, currentCard.head, 'head');
+            addLayer(canvas, currentCard.gifts, 'gifts');
+            addLayer(canvas, currentCard.label, 'label');
+            
+            // Añadir texto personalizado si existe
+            if (currentCard.customText) {
+                addCustomText(canvas);
+            }
+        }
+
+        // Añadir una capa a la vista previa
+        function addLayer(canvas, id, category) {
+            if (id === 'none') return;
+            
+            const option = customizationOptions[category].find(opt => opt.id === id);
+            if (!option) return;
+            
+            const layer = document.createElement('img');
+            layer.className = 'meme-layer';
+            layer.src = option.img;
+            layer.alt = option.name;
+            
+            canvas.appendChild(layer);
+        }
+
+        // Añadir texto personalizado a la vista previa
+        function addCustomText(canvas) {
+            const textLayer = document.createElement('div');
+            textLayer.className = 'custom-text-layer';
+            
+            const textElement = document.createElement('div');
+            textElement.className = 'custom-text';
+            textElement.textContent = currentCard.customText;
+            textElement.style.color = currentCard.textColor;
+            textElement.style.textShadow = `0 0 5px ${currentCard.textColor}, 0 0 10px ${currentCard.textColor}`;
+            
+            textLayer.appendChild(textElement);
+            canvas.appendChild(textLayer);
+        }
+
+        // Configurar botones de acción
+        function setupActionButtons() {
+            document.getElementById('saveBtn').addEventListener('click', saveCard);
+            document.getElementById('resetBtn').addEventListener('click', resetCard);
+            document.getElementById('mintBtn').addEventListener('click', mintCard);
+            document.getElementById('shareBtn').addEventListener('click', shareCard);
+            document.getElementById('randomBtn').addEventListener('click', randomizeCard);
+            document.getElementById('downloadBtn').addEventListener('click', downloadCurrentCard);
+        }
+
+        // Función para generar una carta aleatoria
+        function randomizeCard() {
+            // Para cada categoría, seleccionar un elemento aleatorio
+            for (const category in customizationOptions) {
+                const options = customizationOptions[category];
+                const randomIndex = Math.floor(Math.random() * options.length);
+                currentCard[category] = options[randomIndex].id;
+                
+                // Actualizar selección visual
+                document.querySelectorAll(`#${category}Options .option`).forEach(opt => {
+                    opt.classList.remove('active');
+                    if (opt.getAttribute('data-id') === currentCard[category]) {
+                        opt.classList.add('active');
+                    }
+                });
+            }
+            
+            // Texto aleatorio navideño
+            const christmasTexts = [
+                "Merry Christmas!",
+                "Happy Holidays!",
+                "Joy to the World!",
+                "Ho Ho Ho!",
+                "Peace on Earth",
+                "Season's Greetings",
+                "Feliz Navidad!",
+                "Jingle All the Way",
+                "Let it Snow!",
+                "Christmas Magic"
+            ];
+            
+            const randomTextIndex = Math.floor(Math.random() * christmasTexts.length);
+            currentCard.customText = christmasTexts[randomTextIndex];
+            document.getElementById('customTextInput').value = currentCard.customText;
+            
+            // Actualizar vista previa
+            updateMemePreview();
+            
+            // Efecto visual de éxito
+            const randomBtn = document.getElementById('randomBtn');
+            randomBtn.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.8)';
+            setTimeout(() => {
+                randomBtn.style.boxShadow = '';
+            }, 500);
+        }
+
+        // Guardar la carta actual en la galería
+        function saveCard() {
+            // Crear una copia profunda del estado actual
+            const cardData = JSON.parse(JSON.stringify(currentCard));
+            cardData.id = Date.now(); // ID único basado en timestamp
+            cardData.timestamp = new Date().toLocaleString();
+            
+            // Añadir a la galería
+            savedCards.push(cardData);
+            
+            // Actualizar la galería
+            loadGallery();
+            
+            // Mostrar mensaje de éxito
+            alert('Christmas card saved to your vault! Ready for the blockchain.');
+        }
+
+        // Reiniciar la carta a los valores por defecto
+        function resetCard() {
+            if (confirm('Are you sure you want to reset? All current changes will be lost.')) {
+                currentCard = {
+                    body: 'body1',
+            gifts: 'gifts1',
+            head: 'head3',
+            label: 'label1',
+            background: 'bg5',
+            customText: '',
+            textColor: 'var(--christmas-green)'
+                };
+                
+                // Actualizar selecciones visuales
+                for (const category in customizationOptions) {
+                    document.querySelectorAll(`#${category}Options .option`).forEach(opt => {
+                        opt.classList.remove('active');
+                        if (opt.getAttribute('data-id') === currentCard[category]) {
+                            opt.classList.add('active');
+                        }
+                    });
+                }
+                
+                // Resetear el texto personalizado
+                document.getElementById('customTextInput').value = '';
+                
+                // Resetear opción de color de texto
+                document.querySelectorAll('.text-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                document.querySelector('.text-option').classList.add('active');
+                
+                // Actualizar vista previa
+                updateMemePreview();
+            }
+        }
+
+        // Mintear la carta (simulación)
+        function mintCard() {
+            alert('NFT minting activated! Connecting to blockchain... Your unique Christmas card will be immortalized on the distributed ledger.');
+        }
+
+        // Compartir la carta en X (Twitter)
+        function shareCard() {
+            const text = "Just created this awesome Christmas NFT card with Pump Battle! #PumpBattle #NFT #Christmas";
+            const url = "https://pumpbattle.com";
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+
+        // Función auxiliar para cargar una imagen
+        function loadImage(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+                img.src = src;
+            });
+        }
+
+        // Descargar la carta actual
+        async function downloadCurrentCard() {
+            try {
+                // Obtener las capas en el orden correcto
+                const layers = [
+                    customizationOptions.background.find(opt => opt.id === currentCard.background),
+                    customizationOptions.body.find(opt => opt.id === currentCard.body),
+                    customizationOptions.head.find(opt => opt.id === currentCard.head),
+                    customizationOptions.gifts.find(opt => opt.id === currentCard.gifts),
+                    customizationOptions.label.find(opt => opt.id === currentCard.label)
+                ].filter(layer => layer && layer.id !== 'none');
+                
+                // Crear un canvas para renderizar la imagen
+                const canvas = document.createElement('canvas');
+                canvas.width = 400;
+                canvas.height = 400;
+                const ctx = canvas.getContext('2d');
+                
+                // Dibujar un fondo negro por defecto
+                ctx.fillStyle = '#051405';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Cargar y dibujar cada capa
+                for (const layer of layers) {
+                    try {
+                        const img = await loadImage(layer.img + '?t=' + Date.now());
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    } catch (error) {
+                        console.error('Error loading image:', layer.img, error);
+                    }
+                }
+                
+                // Dibujar el texto personalizado si existe
+                if (currentCard.customText) {
+                    ctx.font = 'bold 20px Orbitron';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    
+                    // Convertir el color CSS a formato canvas
+                    let textColor;
+                    switch(currentCard.textColor) {
+                        case 'var(--christmas-green)':
+                            textColor = '#2e8b57';
+                            break;
+                        case 'var(--christmas-red)':
+                            textColor = '#c41e3a';
+                            break;
+                        case 'var(--christmas-gold)':
+                            textColor = '#ffd700';
+                            break;
+                        case 'var(--christmas-silver)':
+                            textColor = '#c0c0c0';
+                            break;
+                        default:
+                            textColor = '#2e8b57';
+                    }
+                    
+                    // Dibujar sombra del texto
+                    ctx.shadowColor = textColor;
+                    ctx.shadowBlur = 10;
+                    ctx.fillStyle = textColor;
+                    
+                    // Posicionar el texto en la parte inferior
+                    const textY = canvas.height - 20;
+                    ctx.fillText(currentCard.customText, canvas.width / 2, textY);
+                    
+                    // Restablecer la sombra
+                    ctx.shadowBlur = 0;
+                }
+                
+                // Crear el enlace de descarga
+                const link = document.createElement('a');
+                link.download = `christmas-card-${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Efecto visual de éxito
+                const downloadBtn = document.getElementById('downloadBtn');
+                downloadBtn.style.boxShadow = '0 0 20px rgba(46, 139, 87, 0.8)';
+                setTimeout(() => {
+                    downloadBtn.style.boxShadow = '';
+                }, 500);
+            } catch (error) {
+                console.error('Error generating image:', error);
+                alert('Error generating image. Please try again.');
+            }
+        }
+
+        // Configurar el modal para vista ampliada
+        function setupModal() {
+            const modal = document.getElementById('imageModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            // Cerrar modal al hacer clic en la X
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Cerrar modal al hacer clic fuera de la imagen
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Cargar la galería de cartas guardadas
+        function loadGallery() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            
+            if (savedCards.length === 0) {
+                galleryGrid.innerHTML = `
+                    <div class="gallery-empty" style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+                        <p>No Christmas cards in your vault yet. Create and mint your first card!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            galleryGrid.innerHTML = '';
+            
+            savedCards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'gallery-item';
+                
+                // Crear una miniatura de la carta
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'gallery-img-container';
+                
+                // Añadir capas en miniatura en el orden correcto
+                addGalleryLayer(thumbnail, card.background, 'background');
+                addGalleryLayer(thumbnail, card.body, 'body');
+                addGalleryLayer(thumbnail, card.head, 'head');
+                addGalleryLayer(thumbnail, card.gifts, 'gifts');
+                addGalleryLayer(thumbnail, card.label, 'label');
+                
+                // Añadir texto personalizado si existe
+                if (card.customText) {
+                    const textLayer = document.createElement('div');
+                    textLayer.style.position = 'absolute';
+                    textLayer.style.bottom = '5px';
+                    textLayer.style.left = '0';
+                    textLayer.style.width = '100%';
+                    textLayer.style.textAlign = 'center';
+                    textLayer.style.zIndex = '10';
+                    textLayer.style.padding = '0 10px';
+                    
+                    const textElement = document.createElement('div');
+                    textElement.style.fontFamily = 'Orbitron, sans-serif';
+                    textElement.style.fontWeight = '700';
+                    textElement.style.fontSize = '12px';
+                    textElement.style.color = card.textColor;
+                    textElement.style.textShadow = `0 0 3px ${card.textColor}, 0 0 6px ${card.textColor}`;
+                    textElement.style.background = 'rgba(0, 0, 0, 0.6)';
+                    textElement.style.display = 'inline-block';
+                    textElement.style.padding = '3px 8px';
+                    textElement.style.borderRadius = '3px';
+                    textElement.style.maxWidth = '90%';
+                    textElement.style.wordWrap = 'break-word';
+                    textElement.textContent = card.customText;
+                    
+                    textLayer.appendChild(textElement);
+                    thumbnail.appendChild(textLayer);
+                }
+                
+                // Crear botones de acción
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.className = 'gallery-buttons';
+                buttonsContainer.innerHTML = `
+                    <button class="gallery-btn view-btn" data-id="${card.id}" title="View">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="gallery-btn download-btn" data-id="${card.id}" title="Download">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="gallery-btn vote-btn" data-id="${card.id}" title="Vote">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="gallery-btn share-btn" data-id="${card.id}" title="Share">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                `;
+                
+                thumbnail.appendChild(buttonsContainer);
+                cardElement.appendChild(thumbnail);
+                
+                const info = document.createElement('div');
+                info.className = 'gallery-info';
+                info.innerHTML = `
+                    <div class="gallery-title">Christmas Card #${savedCards.indexOf(card) + 1}</div>
+                    <div class="gallery-date">Created: ${card.timestamp}</div>
+                `;
+                
+                cardElement.appendChild(info);
+                galleryGrid.appendChild(cardElement);
+                
+                // Configurar eventos para los botones
+                setupGalleryButtons(card);
+            });
+        }
+
+        // Añadir una capa a la miniatura de la galería
+        function addGalleryLayer(container, id, category) {
+            if (id === 'none') return;
+            
+            const option = customizationOptions[category].find(opt => opt.id === id);
+            if (!option) return;
+            
+            const layer = document.createElement('img');
+            layer.className = 'gallery-img';
+            layer.src = option.img;
+            layer.alt = option.name;
+            layer.style.position = 'absolute';
+            layer.style.top = '0';
+            layer.style.left = '0';
+            layer.style.width = '100%';
+            layer.style.height = '100%';
+            layer.style.objectFit = 'contain';
+            
+            container.appendChild(layer);
+        }
+
+        // Configurar eventos para los botones de la galería
+        function setupGalleryButtons(card) {
+            const cardId = card.id;
+            
+            // Botón Ver
+            document.querySelector(`.view-btn[data-id="${cardId}"]`).addEventListener('click', function() {
+                openModal(card);
+            });
+            
+            // Botón Descargar
+            document.querySelector(`.download-btn[data-id="${cardId}"]`).addEventListener('click', function() {
+                downloadGalleryCard(card);
+            });
+            
+            // Botón Votar
+            document.querySelector(`.vote-btn[data-id="${cardId}"]`).addEventListener('click', function() {
+                voteCard(card);
+            });
+            
+            // Botón Compartir
+            document.querySelector(`.share-btn[data-id="${cardId}"]`).addEventListener('click', function() {
+                shareGalleryCard(card);
+            });
+        }
+
+        // Abrir modal con vista ampliada
+        function openModal(card) {
+            const modal = document.getElementById('imageModal');
+            const modalImgContainer = document.getElementById('modalImgContainer');
+            
+            // Limpiar el contenedor
+            modalImgContainer.innerHTML = '';
+            
+            // Añadir capas en el orden correcto
+            addModalLayer(modalImgContainer, card.background, 'background');
+            addModalLayer(modalImgContainer, card.body, 'body');
+            addModalLayer(modalImgContainer, card.head, 'head');
+            addModalLayer(modalImgContainer, card.gifts, 'gifts');
+            addModalLayer(modalImgContainer, card.label, 'label');
+            
+            // Añadir texto personalizado si existe
+            if (card.customText) {
+                const textLayer = document.createElement('div');
+                textLayer.style.position = 'absolute';
+                textLayer.style.bottom = '10px';
+                textLayer.style.left = '0';
+                textLayer.style.width = '100%';
+                textLayer.style.textAlign = 'center';
+                textLayer.style.zIndex = '10';
+                textLayer.style.padding = '0 10px';
+                
+                const textElement = document.createElement('div');
+                textElement.style.fontFamily = 'Orbitron, sans-serif';
+                textElement.style.fontWeight = '700';
+                textElement.style.fontSize = '20px';
+                textElement.style.color = card.textColor;
+                textElement.style.textShadow = `0 0 5px ${card.textColor}, 0 0 10px ${card.textColor}`;
+                textElement.style.background = 'rgba(0, 0, 0, 0.6)';
+                textElement.style.display = 'inline-block';
+                textElement.style.padding = '5px 15px';
+                textElement.style.borderRadius = '5px';
+                textElement.style.maxWidth = '90%';
+                textElement.style.wordWrap = 'break-word';
+                textElement.textContent = card.customText;
+                
+                textLayer.appendChild(textElement);
+                modalImgContainer.appendChild(textLayer);
+            }
+            
+            modal.style.display = 'flex';
+        }
+
+        // Añadir una capa al modal
+        function addModalLayer(container, id, category) {
+            if (id === 'none') return;
+            
+            const option = customizationOptions[category].find(opt => opt.id === id);
+            if (!option) return;
+            
+            const layer = document.createElement('img');
+            layer.className = 'modal-layer';
+            layer.src = option.img;
+            layer.alt = option.name;
+            
+            container.appendChild(layer);
+        }
+
+        // Descargar carta de la galería
+        async function downloadGalleryCard(card) {
+            try {
+                // Obtener las capas en el orden correcto
+                const layers = [
+                    customizationOptions.background.find(opt => opt.id === card.background),
+                    customizationOptions.body.find(opt => opt.id === card.body),
+                    customizationOptions.head.find(opt => opt.id === card.head),
+                    customizationOptions.gifts.find(opt => opt.id === card.gifts),
+                    customizationOptions.label.find(opt => opt.id === card.label)
+                ].filter(layer => layer && layer.id !== 'none');
+                
+                // Crear un canvas para renderizar la imagen
+                const canvas = document.createElement('canvas');
+                canvas.width = 400;
+                canvas.height = 400;
+                const ctx = canvas.getContext('2d');
+                
+                // Dibujar un fondo negro por defecto
+                ctx.fillStyle = '#051405';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Cargar y dibujar cada capa
+                for (const layer of layers) {
+                    try {
+                        const img = await loadImage(layer.img + '?t=' + Date.now());
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    } catch (error) {
+                        console.error('Error loading image:', layer.img, error);
+                    }
+                }
+                
+                // Dibujar el texto personalizado si existe
+                if (card.customText) {
+                    ctx.font = 'bold 20px Orbitron';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    
+                    // Convertir el color CSS a formato canvas
+                    let textColor;
+                    switch(card.textColor) {
+                        case 'var(--christmas-green)':
+                            textColor = '#2e8b57';
+                            break;
+                        case 'var(--christmas-red)':
+                            textColor = '#c41e3a';
+                            break;
+                        case 'var(--christmas-gold)':
+                            textColor = '#ffd700';
+                            break;
+                        case 'var(--christmas-silver)':
+                            textColor = '#c0c0c0';
+                            break;
+                        default:
+                            textColor = '#2e8b57';
+                    }
+                    
+                    // Dibujar sombra del texto
+                    ctx.shadowColor = textColor;
+                    ctx.shadowBlur = 10;
+                    ctx.fillStyle = textColor;
+                    
+                    // Posicionar el texto en la parte inferior
+                    const textY = canvas.height - 20;
+                    ctx.fillText(card.customText, canvas.width / 2, textY);
+                    
+                    // Restablecer la sombra
+                    ctx.shadowBlur = 0;
+                }
+                
+                // Crear el enlace de descarga
+                const link = document.createElement('a');
+                link.download = `christmas-card-${card.id}.png`;
+                link.href = canvas.toDataURL('image/png');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } catch (error) {
+                console.error('Error generating image:', error);
+                alert('Error generating image. Please try again.');
+            }
+        }
+
+        // Votar por carta
+        function voteCard(card) {
+            alert(`You've voted for Christmas card #${savedCards.findIndex(c => c.id === card.id) + 1}! Your vote has been recorded on the blockchain.`);
+        }
+
+        // Compartir carta de la galería
+        function shareGalleryCard(card) {
+            const text = `Check out this awesome Christmas NFT card I created with Pump Battle! #PumpBattle #NFT #Christmas`;
+            const url = "https://pumpbattle.com";
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
